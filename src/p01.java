@@ -2,6 +2,8 @@
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 
@@ -14,6 +16,8 @@ import com.jogamp.opengl.awt.GLCanvas;
 import com.jogamp.opengl.glu.GLU;
 import com.jogamp.opengl.util.FPSAnimator;
 import com.jogamp.opengl.util.gl2.GLUT;
+import com.jogamp.opengl.util.texture.Texture;
+import com.jogamp.opengl.util.texture.TextureIO;
 
 public class p01 extends JFrame implements GLEventListener {
 
@@ -22,6 +26,8 @@ public class p01 extends JFrame implements GLEventListener {
     private GLUT glut;
     private FPSAnimator animator;
     private float kat=0.0f;
+
+    private int texture;
 
     public p01(String string) {
         super(string);
@@ -48,6 +54,7 @@ public class p01 extends JFrame implements GLEventListener {
         //gl.glRotatef(kat, 0.0f, 0.0f, 1.0f);
         gl.glColor3f(1.0f, 1.0f, 0.0f);
 
+
         int s = 5;
         int p = 4;
         float r = 1.0f;
@@ -57,97 +64,88 @@ public class p01 extends JFrame implements GLEventListener {
         int n =(int)Math.round(4*Math.PI*r/h),  m=3, k=(int)Math.round(2*r/h);
 
 
-        gl.glPushMatrix();
-        gl.glTranslatef(0.0f,-1.25f,0.0f);
-        Prostopadloscian.Draw(gl,1.0f,2.0f,1.0f,3,5,3);
 
-        gl.glTranslatef(0.0f,-0.25f,1.125f);
-        Prostopadloscian.Draw(gl,1.0f,0.25f,0.5f,3,2,3);
 
-        gl.glRotatef(90,1.0f,0.0f,0.0f);
-        gl.glRotatef(90,0.0f,0.0f,1.0f);
-        gl.glTranslatef(-0.425f,0.55f,0.2f);
-        Walec.Draw(gl,0.25,0.1,10,5);
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.0f,0.05f,0.0f);
-        Kolo.Draw(gl,0.25,10,5);
-        gl.glPopMatrix();
-
-        gl.glRotatef(180,1.0f,0.0f,0.0f);
-        gl.glTranslatef(0.0f,1.1f,0.0f);
-        Walec.Draw(gl,0.25,0.1,10,5);
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.0f,0.05f,0.0f);
-        Kolo.Draw(gl,0.25,10,5);
-        gl.glPopMatrix();
-
-        gl.glTranslatef(-1.3f,0.0f,0.0f);
-        Walec.Draw(gl,0.25,0.1,10,5);
 
 
         gl.glPushMatrix();
-        gl.glTranslatef(0.0f,0.05f,0.0f);
-        Kolo.Draw(gl,0.25,10,5);
+            //ciałko
+            gl.glTranslatef(0.0f,-1.0f,0.0f);
+//            gl.glBindTexture(GL2.GL_TEXTURE_2D, texture);
+//            gl.glBegin(GL2.GL_QUADS);
+//            gl.glNormal3f(0.0f,0.0f,1.0f);
+            Prostopadloscian.Draw(gl,1.0f,2.0f,1.0f,3,5,3);
+//            gl.glEnd();
+
+            //maska
+            gl.glTranslatef(0.0f,-0.25f,1.125f);
+            Prostopadloscian.Draw(gl,1.0f,0.25f,0.5f,3,2,3);
+
+
+
+            //prawa przednia opona
+            gl.glRotatef(90,1.0f,0.0f,0.0f);
+            gl.glRotatef(90,0.0f,0.0f,1.0f);
+            gl.glTranslatef(-0.425f,0.55f,0.2f);
+
+            //skręt kołami
+            gl.glPushMatrix();
+                Walec.Draw(gl,0.25,0.1,10,5);
+
+                //prawa przednia felga
+                gl.glPushMatrix();
+                    gl.glTranslatef(0.0f,0.05f,0.0f);
+                    Kolo.Draw(gl,0.25,10,5);
+                gl.glPopMatrix();
+
+                //lewa przednia opona
+                gl.glRotatef(180,1.0f,0.0f,0.0f);
+                gl.glTranslatef(0.0f,1.1f,0.0f);
+                Walec.Draw(gl,0.25,0.1,10,5);
+
+                //lewa przednia felga
+                gl.glPushMatrix();
+                    gl.glTranslatef(0.0f,0.05f,0.0f);
+                    Kolo.Draw(gl,0.25,10,5);
+                gl.glPopMatrix();
+
+            gl.glPopMatrix();
+
+
+            //lewa tylna opona
+            gl.glTranslatef(-1.3f,0.0f,0.0f);
+            Walec.Draw(gl,0.25,0.1,10,5);
+
+            //lewa tylna felga
+            gl.glPushMatrix();
+                gl.glTranslatef(0.0f,0.05f,0.0f);
+                Kolo.Draw(gl,0.25,10,5);
+            gl.glPopMatrix();
+
+
+            //prawa tylna opona
+            gl.glRotatef(180,1.0f,0.0f,0.0f);
+            gl.glTranslatef(0.0f,1.1f,0.0f);
+            Walec.Draw(gl,0.25,0.1,10,5);
+
+
+            //prawa tylna felga
+            gl.glPushMatrix();
+                gl.glTranslatef(0.0f,0.05f,0.0f);
+                Kolo.Draw(gl,0.25,10,5);
+            gl.glPopMatrix();
+
         gl.glPopMatrix();
 
-        gl.glRotatef(180,1.0f,0.0f,0.0f);
-        gl.glTranslatef(0.0f,1.1f,0.0f);
-        Walec.Draw(gl,0.25,0.1,10,5);
 
-
+        //kogut
         gl.glPushMatrix();
-        gl.glTranslatef(0.0f,0.05f,0.0f);
-        Kolo.Draw(gl,0.25,10,5);
-        gl.glPopMatrix();
-
-        gl.glPopMatrix();
-
-        gl.glPushMatrix();
-        gl.glTranslatef(0.0f,-0.625f,0.7f);
-        Prostopadloscian.Draw(gl,0.5f,0.25f,0.25f,3,3,3);
+            gl.glTranslatef(0.0f,-0.375f,0.7f);
+            Prostopadloscian.Draw(gl,0.5f,0.25f,0.25f,3,3,3);
         gl.glPopMatrix();
 
 
 
-
-
-//        Walec.Draw(gl,r,h,n,m);
-//        gl.glPushMatrix();
-//        gl.glTranslatef(0.0f,h/2,0.0f);
-//        gl.glRotatef(360/n,0.0f,1.0f,0.0f);
-//        Kolo.Draw(gl,r,n,k);
-//        gl.glPopMatrix();
-//
-//        gl.glPushMatrix();
-//        gl.glRotatef(180,1.0f,0.0f,0.0f);
-//        gl.glTranslatef(0.0f,h/2,0.0f);
-//        gl.glRotatef(360/n,0.0f,1.0f,0.0f);
-//        Kolo.Draw(gl,r,n,k);
-//        gl.glPopMatrix();
-//
-//        gl.glPushMatrix();
-//
-//        for(int i =0; i<s;i++){
-//            gl.glPushMatrix();
-//            gl.glRotatef(360*i/s,0.0f,1.0f,0.0f);
-//            gl.glTranslatef(0.0f,h/2+sh/2,r-(3*sr));
-//            gl.glColor3f(1.0f,0.0f,0.0f);
-//            Walec.Draw(gl,sr,sh,16,16);
-//            gl.glPopMatrix();
-//            gl.glPushMatrix();
-//            gl.glRotatef(360*i/s,0.0f,1.0f,0.0f);
-//            gl.glTranslatef(0.0f,sh/2+(h/2+sh/2),r-(3*sr));
-//            gl.glColor3f(1.0f,1.0f,0.0f);
-//            Kula.Draw(gl,r/17,16,16);
-//            gl.glPopMatrix();
-//        }
-//        gl.glPopMatrix();
-//        for(int i = 0;i<=8;i+=2){
-//            gl.glTranslatef(0.0f,h,0.0f);
-//            Prostopadloscian.Draw(gl,a-i*h,a-i*h,h,2*n-(i+1),2*n-(i+1),(int)(2*n*h)+1);
-//        }
 
 
 
@@ -195,6 +193,16 @@ public class p01 extends JFrame implements GLEventListener {
 
         gl.glEnable(GL2.GL_LIGHT0);
         //gl.glEnable(GL2.GL_NORMALIZE);
+
+        gl.glEnable(GL2.GL_TEXTURE_2D);
+        try{
+            File f=new File("tex03.jpg");
+            Texture t= TextureIO.newTexture(f, true);
+            texture=t.getTextureObject(gl);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
         String s=gl.glGetString(GL2.GL_RENDERER);
         setTitle(s);
     }
