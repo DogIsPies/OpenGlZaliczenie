@@ -74,12 +74,12 @@ public class p01 extends JFrame implements GLEventListener {
 //            gl.glBindTexture(GL2.GL_TEXTURE_2D, texture);
 //            gl.glBegin(GL2.GL_QUADS);
 //            gl.glNormal3f(0.0f,0.0f,1.0f);
-            Prostopadloscian.Draw(gl,1.0f,2.0f,1.0f,3,5,3);
+            Prostopadloscian.Draw(gl,1.0f,2.0f,1.0f,2,2,2,texture);
 //            gl.glEnd();
 
             //maska
             gl.glTranslatef(0.0f,-0.25f,1.125f);
-            Prostopadloscian.Draw(gl,1.0f,0.25f,0.5f,3,2,3);
+            Prostopadloscian.Draw(gl,1.0f,0.25f,0.5f,2,2,2,texture);
 
 
 
@@ -141,7 +141,7 @@ public class p01 extends JFrame implements GLEventListener {
         //kogut
         gl.glPushMatrix();
             gl.glTranslatef(0.0f,-0.375f,0.7f);
-            Prostopadloscian.Draw(gl,0.5f,0.25f,0.25f,3,3,3);
+            Prostopadloscian.Draw(gl,0.5f,0.25f,0.25f,3,3,3,texture);
         gl.glPopMatrix();
 
 
@@ -196,7 +196,7 @@ public class p01 extends JFrame implements GLEventListener {
 
         gl.glEnable(GL2.GL_TEXTURE_2D);
         try{
-            File f=new File("tex03.jpg");
+            File f=new File("xD.jpg");
             Texture t= TextureIO.newTexture(f, true);
             texture=t.getTextureObject(gl);
         }catch(IOException e){
