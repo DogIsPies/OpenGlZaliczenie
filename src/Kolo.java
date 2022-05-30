@@ -14,10 +14,10 @@ public class Kolo {
 			gl.glTexCoord3f(0.0f,0.0f,0.0f);gl.glVertex3d(0,0,0);
 			alpha=2.0*Math.PI*i/n;
 			rr=r/(m-1);
-			gl.glTexCoord3f(0.0f,0.1f,0.1f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
+			gl.glTexCoord3f(0.0f,0.125f,0.125f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 			alpha=2.0*Math.PI*(i-1)/n;
 			rr=r/(m-1);
-			gl.glTexCoord3f(0.1f,0.1f,0.1f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
+			gl.glTexCoord3f(0.125f,0.125f,0.125f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 			gl.glEnd();
 			gl.glPopAttrib();
 		}
@@ -32,13 +32,13 @@ public class Kolo {
 				gl.glTexCoord2f(0.0f,0.0f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 				rr=r*j/(m-1);
 				alpha=2.0*Math.PI*(i-1)/n;
-				gl.glTexCoord2f(1.0f,0.0f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
+				gl.glTexCoord2f(0.125f,0.0f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 				rr=r*(j-1)/(m-1);
 				alpha=2.0*Math.PI*(i-1)/n;
-				gl.glTexCoord2f(1.0f,1.0f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
+				gl.glTexCoord2f(0.125f,0.125f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 				rr=r*(j-1)/(m-1);
 				alpha=2.0*Math.PI*i/n;
-				gl.glTexCoord2f(0.0f,1.0f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
+				gl.glTexCoord2f(0.0f,0.125f);gl.glVertex3d(rr*Math.cos(alpha),0,rr*Math.sin(alpha));
 				gl.glEnd();
 				gl.glPopAttrib();
 			}

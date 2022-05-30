@@ -1,7 +1,7 @@
 
 import com.jogamp.opengl.GL2;
 
-public class Prostopadloscian {
+public class ProstopadloscianMaska {
 
 
 	public static void Draw(GL2 gl,float a,float b,float h,int n,int m,int p,int gora,int frontTyl,int lewaPrawa ){
@@ -35,8 +35,8 @@ public class Prostopadloscian {
 					gl.glBegin(GL2.GL_QUADS);
 					//front i tył
 					gl.glTexCoord2f(0.0f,0.0f); gl.glVertex3f(-a/2+a*j/(n-1),-h/2+h*i/(p-1),b/2);
-					gl.glTexCoord2f(0.5f,0.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*i/(p-1),b/2);
-					gl.glTexCoord2f(0.5f,1.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*(i+1)/(p-1),b/2);
+					gl.glTexCoord2f(1.0f,0.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*i/(p-1),b/2);
+					gl.glTexCoord2f(1.0f,1.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*(i+1)/(p-1),b/2);
 					gl.glTexCoord2f(0.0f,1.0f); gl.glVertex3f(-a/2+a*j/(n-1),-h/2+h*(i+1)/(p-1),b/2);
 					gl.glEnd();
 					gl.glPopAttrib();
@@ -95,8 +95,8 @@ public class Prostopadloscian {
 					gl.glBegin(GL2.GL_QUADS);
 					//front i tył
 					gl.glTexCoord2f(0.0f,0.0f); gl.glVertex3f(-a/2+a*j/(n-1),-h/2+h*i/(p-1),b/2);
-					gl.glTexCoord2f(0.5f,0.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*i/(p-1),b/2);
-					gl.glTexCoord2f(0.5f,1.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*(i+1)/(p-1),b/2);
+					gl.glTexCoord2f(1.0f,0.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*i/(p-1),b/2);
+					gl.glTexCoord2f(1.0f,1.0f); gl.glVertex3f(-a/2+a*(j+1)/(n-1),-h/2+h*(i+1)/(p-1),b/2);
 					gl.glTexCoord2f(0.0f,1.0f); gl.glVertex3f(-a/2+a*j/(n-1),-h/2+h*(i+1)/(p-1),b/2);
 					gl.glEnd();
 					gl.glPopAttrib();
