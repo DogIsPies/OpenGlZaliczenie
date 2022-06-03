@@ -31,12 +31,12 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
     private float kat = 0.0f;
 
     private float obrotswiatel = 0.0f;
-    private float obrot = 0.0f;
+    private float obrot = 25.0f;
     private float skret = 0.0f;
 
     private boolean turnOnLights = false;
 
-    private int tyl, oknoBok, oknotyl, przod, gora, las, guma, felga, red, blue, przodmaskilewa, przodmaskiprawa;
+    private int tyl, oknoBok, oknotyl, przod, gora, las, guma, felga, red, blue, przodmaskilewa, przodmaskiprawa, trawa;
 
     public p01(String string) {
         super(string);
@@ -87,24 +87,30 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         gl.glEnable(GL2.GL_DEPTH_TEST);
         gl.glEnable(GL2.GL_LIGHTING);
 
+        int lKrawedzi = 2;
+        float r = 0.25f;
+        float hWalca = 0.1f;
+        float xCiala = 1.0f;
+        float zCiala = 2.0f;
+        float hCiala = 1.0f;
 
 
 
         gl.glLoadIdentity();
+        gl.glPushMatrix();
 
+        gl.glTranslatef(0.0f, -1.0f-(hCiala)-(hWalca), 0.0f);
+        Prostopadloscian.Draw(gl, 20.0f, 20.0f, 0.1f, lKrawedzi*4, lKrawedzi*4, lKrawedzi*4, trawa,trawa,trawa);
+
+        gl.glPopMatrix();
         //gl.glRotatef(kat, 1.0f, 0.0f, 0.0f);
-        gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(obrot, 0.0f, 1.0f, 0.0f);
         //gl.glRotatef(kat, 0.0f, 0.0f, 1.0f);
 //        gl.glColor3f(1.0f, 1.0f, 0.0f);
 
 
-        int s = 5;
-        int p = 4;
-        float r = 0.25f;
-        float hWalca = 0.1f;
-        float xCiala = 1.0f;
-        float zCiała = 2.0f;
-        float hCiała = 1.0f;
+
+
 
 
 
@@ -112,15 +118,15 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         //tyl auta prawa strona
         gl.glPushMatrix();
 
-        gl.glTranslatef(-xCiala/4.0f, -1.0f, -zCiała/4.0f);
-        Prostopadloscian.Draw(gl, xCiala/2.0f, zCiała/2.0f, hCiała, 2, 2, 2, gora,tyl,oknotyl);
+        gl.glTranslatef(-xCiala/4.0f, -1.0f, -zCiala/4.0f);
+        Prostopadloscian.Draw(gl, xCiala/2.0f, zCiala/2.0f, hCiala, lKrawedzi, lKrawedzi, lKrawedzi, gora,tyl,oknotyl);
         gl.glPopMatrix();
 
         //tyl auta lewa strona
         gl.glPushMatrix();
 
-        gl.glTranslatef(xCiala/4.0f, -1.0f, -zCiała/4.0f);
-        ProstopadloscianLustrzaneOdbicie.Draw(gl, xCiala/2.0f, zCiała/2.0f, hCiała, 2, 2, 2, gora,tyl,oknotyl);
+        gl.glTranslatef(xCiala/4.0f, -1.0f, -zCiala/4.0f);
+        ProstopadloscianLustrzaneOdbicie.Draw(gl, xCiala/2.0f, zCiala/2.0f, hCiala, lKrawedzi, lKrawedzi, lKrawedzi, gora,tyl,oknotyl);
         gl.glPopMatrix();
 
 
@@ -129,22 +135,22 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         //przod auta prawa strona
         gl.glPushMatrix();
 
-        gl.glTranslatef(-xCiala/4.0f, -1.0f, zCiała/4.0f);
-        Prostopadloscian.Draw(gl, xCiala/2.0f, zCiała/2.0f, hCiała, 2, 2, 2, gora,przod,oknoBok);
+        gl.glTranslatef(-xCiala/4.0f, -1.0f, zCiala/4.0f);
+        Prostopadloscian.Draw(gl, xCiala/2.0f, zCiala/2.0f, hCiala, lKrawedzi, lKrawedzi, lKrawedzi, gora,przod,oknoBok);
         gl.glPopMatrix();
 
         //przod auta lewa strona
         gl.glPushMatrix();
 
-        gl.glTranslatef(xCiala/4.0f, -1.0f, zCiała/4.0f);
-        ProstopadloscianLustrzaneOdbicie.Draw(gl, xCiala/2.0f, zCiała/2.0f, hCiała, 2, 2, 2, gora,przod,oknoBok);
+        gl.glTranslatef(xCiala/4.0f, -1.0f, zCiala/4.0f);
+        ProstopadloscianLustrzaneOdbicie.Draw(gl, xCiala/2.0f, zCiala/2.0f, hCiala, lKrawedzi, lKrawedzi, lKrawedzi, gora,przod,oknoBok);
         gl.glPopMatrix();
 
         //maska lewa
         gl.glPushMatrix();
 
         gl.glTranslatef(xCiala/4.0f, -1.25f, 1.125f);
-        ProstopadloscianMaska.Draw(gl, xCiala/2.0f, zCiała/8.0f, hCiała/2.0f, 2, 2, 2, gora,przodmaskiprawa,oknotyl,
+        ProstopadloscianMaska.Draw(gl, xCiala/2.0f, zCiala/8.0f, hCiala/2.0f, lKrawedzi, lKrawedzi, lKrawedzi, gora,przodmaskiprawa,oknotyl,
                 0.0f,0.0f,0.0f,0.5f,0.125f,0.5f,0.125f,0.0f);
         gl.glPopMatrix();
 
@@ -152,7 +158,7 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         gl.glPushMatrix();
 
         gl.glTranslatef(-xCiala/4.0f, -1.25f, 1.125f);
-        ProstopadloscianLustrzaneOdbicieMaska.Draw(gl, xCiala/2.0f, zCiała/8.0f, hCiała/2.0f, 2, 2, 2, gora,przodmaskilewa,oknotyl,
+        ProstopadloscianLustrzaneOdbicieMaska.Draw(gl, xCiala/2.0f, zCiala/8.0f, hCiala/2.0f, lKrawedzi, lKrawedzi, lKrawedzi, gora,przodmaskilewa,oknotyl,
                 0.0f,0.5f,0.0f,0.0f,0.125f,0.0f,0.125f,0.5f);
         gl.glPopMatrix();
 
@@ -164,33 +170,33 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
 
         gl.glPushMatrix();
 
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(skret, 0.0f, 0.0f, 1.0f);
-        gl.glRotatef(kat *= -1.0f, 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(-kat, 0.0f, 1.0f, 0.0f);
 
         Walec.Draw(gl, r, hWalca, 10, 2, guma, 0.25f);
         gl.glPopMatrix();
 
         //prawa przednia felga
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(skret, 0.0f, 0.0f, 1.0f);
         gl.glTranslatef(0.0f, hWalca / 2.0f, 0.0f);
-        gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
+        gl.glRotatef(-kat, 0.0f, 1.0f, 0.0f);
 
         Kolo.Draw(gl, r, 10, 5, felga);
         gl.glPopMatrix();
         //prawa tylna opona
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
-        gl.glRotatef(kat *= -1.0f, 0.0f, 1.0f, 0.0f);
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
+        gl.glRotatef(-kat, 0.0f, 1.0f, 0.0f);
         Walec.Draw(gl, r, hWalca, 10, 2, guma,0.25f);
         gl.glPopMatrix();
 
         //prawa tylna felga
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + hWalca), 1.0f + (hCiała / 2.0f));
-        gl.glRotatef(kat * -1.0f, 0.0f, 1.0f, 0.0f);
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + hWalca), 1.0f + (hCiala / 2.0f));
+        gl.glRotatef(-kat, 0.0f, 1.0f, 0.0f);
         Kolo.Draw(gl, r, 10, 5, felga);
         gl.glPopMatrix();
         gl.glPopMatrix();
@@ -202,20 +208,20 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
 
 
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
         Walec.Draw(gl, r, hWalca, 10, 2, guma,0.25f);
         gl.glPopMatrix();
 
         //tylna lewa felga
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + hWalca), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f), ((xCiala / 2.0f) + hWalca), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
         Kolo.Draw(gl, r, 10, 5, felga);
         gl.glPopMatrix();
         //przednia lewa opona
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(skret, 0.0f, 0.0f, 1.0f);
         gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
 
@@ -224,7 +230,7 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
 
         //przednia lewa felga
         gl.glPushMatrix();
-        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiała / 2.0f));
+        gl.glTranslatef(((xCiala / 2.0f) + r / 2.0f) * -1, ((xCiala / 2.0f) + (hWalca / 2.0f)), 1.0f + (hCiala / 2.0f));
         gl.glRotatef(skret, 0.0f, 0.0f, 1.0f);
         gl.glTranslatef(0.0f, hWalca / 2.0f, 0.0f);
         gl.glRotatef(kat, 0.0f, 1.0f, 0.0f);
@@ -236,26 +242,29 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
 
         //kogut
         gl.glPushMatrix();
-        gl.glTranslatef(0.0f, -1.0f + (hCiała / 2.0f) + (hCiała / 10.0f), zCiała / 3.0f);
-        Prostopadloscian.Draw(gl, xCiala / 4.0f, zCiała / 10.0f, hCiała / 5.0f, 2, 2, 2,gora,gora,gora);
+        gl.glTranslatef(0.0f, -1.0f + (hCiala / 2.0f) + (hCiala / 10.0f), zCiala / 3.0f);
+        Prostopadloscian.Draw(gl, xCiala / 4.0f, zCiala / 10.0f, hCiala / 5.0f, 2, 2, 2,gora,gora,gora);
         gl.glPopMatrix();
         //lewe światło koguta
         gl.glPushMatrix();
-        gl.glTranslatef(zCiała / 10.0f, -1.0f + (hCiała / 2.0f) + (hCiała / 10.0f), zCiała / 3.0f);
+        gl.glTranslatef(zCiala / 10.0f, -1.0f + (hCiala / 2.0f) + (hCiala / 10.0f), zCiala / 3.0f);
         gl.glRotatef(-obrotswiatel * 4.0f, 0.0f, 1.0f, 0.0f);
-        Walec.Draw(gl, zCiała / 20.0f, hCiała / 5.0f, 8, 2, red,1.0f);
-        gl.glTranslatef(0.0f, (hCiała / 5.0f)/2.0f, 0.0f);
-        Kolo.Draw(gl,zCiała/20.0f, 8,2,red);
+        Walec.Draw(gl, zCiala / 20.0f, hCiala / 5.0f, 6, 2, red,1.0f);
+
+        gl.glTranslatef(0.0f, (hCiala / 5.0f)/2.0f, 0.0f);
+        Kolo.Draw(gl,zCiala/20.0f, 8,2,red);
         gl.glPopMatrix();
 
 
         //prawe światło koguta
         gl.glPushMatrix();
-        gl.glTranslatef(-zCiała / 10.f, -1.0f + (hCiała / 2.0f) + (hCiała / 10.0f), zCiała / 3.0f);
+        gl.glTranslatef(-zCiala / 10.f, -1.0f + (hCiala / 2.0f) + (hCiala / 10.0f), zCiala / 3.0f);
         gl.glRotatef(obrotswiatel * 4.0f, 0.0f, 1.0f, 0.0f);
-        Walec.Draw(gl, zCiała / 20.0f, hCiała / 5.0f, 8, 2, blue,1.0f);
-        gl.glTranslatef(0.0f, (hCiała / 5.0f)/2.0f, 0.0f);
-        Kolo.Draw(gl,zCiała/20.0f, 8,2,blue);
+        Walec.Draw(gl, zCiala / 20.0f, hCiala / 5.0f, 6, 2, blue,1.0f);
+
+        gl.glTranslatef(0.0f, (hCiala / 5.0f)/2.0f, 0.0f);
+        Kolo.Draw(gl,zCiala/20.0f, 8,2,blue);
+
         gl.glPopMatrix();
 
         if(turnOnLights) {
@@ -264,11 +273,6 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
                 obrotswiatel -= 360.0f;
         }
         else obrotswiatel = 0.0f;
-
-        obrot += 1.0f;
-        if (obrot >= 360.0f)
-            obrot -= 360.0f;
-
 
         gl.glFlush();
 
@@ -400,6 +404,13 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            File f = new File("trawa.jpg");
+            Texture t = TextureIO.newTexture(f, true);
+            trawa = t.getTextureObject(gl);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         String s = gl.glGetString(GL2.GL_RENDERER);
         setTitle(s);
@@ -414,7 +425,7 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         float aspect = (float) width / height;
         gl.glMatrixMode(GL2.GL_PROJECTION);
         gl.glLoadIdentity();
-        glu.gluPerspective(45.0, aspect, 1.0, 10.0);
+        glu.gluPerspective(55.0, aspect, 1.0f, 10.0f);
         glu.gluLookAt(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         gl.glMatrixMode(GL2.GL_MODELVIEW);
     }
@@ -440,33 +451,48 @@ public class p01 extends JFrame implements GLEventListener, KeyListener {
         switch (e.getKeyChar()) {
 
             case ('a'): {
-                skret -= 1.0f;
 
-                System.out.println(e.getKeyChar() + " " + skret);
+                if(skret>-25.0f){
+                    skret -= 1.0f;
+                }
+
+//                System.out.println(e.getKeyChar() + " " + skret);
                 break;
             }
             case ('d'): {
-                skret += 1.0f;
+                if(skret<25.0f){
+                    skret += 1.0f;
+                }
 
-                System.out.println(e.getKeyChar() + " " + skret);
+//                System.out.println(e.getKeyChar() + " " + skret);
                 break;
             }
 
             case ('w'): {
                 kat += 2.0f;
-                System.out.println(e.getKeyChar() + " " + kat);
+//                System.out.println(e.getKeyChar() + " " + kat);
                 break;
             }
             case ('s'): {
                 kat -= 2.0f;
-                System.out.println(e.getKeyChar() + " " + kat);
+//                System.out.println(e.getKeyChar() + " " + kat);
+                break;
+            }
+            case ('y'): {
+                obrot -= 1.0f;
+//                System.out.println(e.getKeyChar() + " " + kat);
+                break;
+            }
+            case ('u'): {
+                obrot += 1.0f;
+//                System.out.println(e.getKeyChar() + " " + kat);
                 break;
             }
 
 
-
             default:
         }
+
     }
 
     @Override
